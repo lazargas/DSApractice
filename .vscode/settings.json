@@ -2,6 +2,14 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "vector": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "deque": "cpp",
+        "format": "cpp",
+        "list": "cpp",
+        "xstring": "cpp",
+        "stack": "cpp",
+        "xutility": "cpp",
+        "forward_list": "cpp",
+        "queue": "cpp"
     }
 }

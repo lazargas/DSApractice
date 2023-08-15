@@ -54,15 +54,59 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-void solve()
-{
+void dfs(int row,int col,vector<vector<char>> arr,vector<vector<int>> &vis,int delrow[],int delcol[],int &count,char character){
+   vis[row][col]=1;
+   count++;
+   if(count==3)return;
+   
+   for(int i=0;i<8;i++){
+	 int nrow = row+delrow[i];
+	 int ncol = col+delcol[i];
+
+	 if(nrow>=0 and nrow<3 and ncol>=0 and ncol<3 and vis[nrow][ncol]==0 and arr[nrow][ncol]==character){
+		dfs(nrow,ncol,arr,vis,delrow,delcol,count,character);
+	 }
+   }
 }
+
 int main()
 {
 #ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
 #endif
-
+    int t;
+	cin>>t;
+	while(t--){
+		vector<vector<char>> arr(3,vector<char>(3,0));
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				char temp;
+				cin>>temp;
+				arr[i][j]=temp;
+			}
+		}
+		vector<vector<int>> vis(3,vector<int>(3,0));
+		int delrow[] = {-1,-1,0,1,1,1,0,-1};
+		int delcol[] = {0,1,1,1,0,-1,-1,-1};
+        int count = 0;
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				if(vis[i][j]==0){
+					count=0;
+					dfs(i,j,arr,vis,delrow,delcol,count,arr[i][j]);
+					if(count==3)
+					{cout<<arr[i][j]<<'\n';
+					break;
+					}
+					else if(count==3 and arr[i][j]=='.')
+					{cout<<"DRAW"<<'\n';
+					break;
+					}
+				}
+			}
+		}
+		cout<<"asda"<<endl;
+	}
 	return 0;
 }
